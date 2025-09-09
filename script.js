@@ -45,27 +45,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 手風琴功能 (Accordion) ---
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-    accordionHeaders.forEach(header => {
+ accordionHeaders.forEach(header => {
         header.addEventListener('click', () => {
             const item = header.parentElement;
             const content = header.nextElementSibling;
+            const isActive = item.classList.contains('active');
 
             // 關閉所有其他已開啟的手風琴項目
             accordionHeaders.forEach(otherHeader => {
                 const otherItem = otherHeader.parentElement;
+                const otherContent = otherHeader.nextElementSibling;
                 if (otherItem !== item && otherItem.classList.contains('active')) {
                     otherItem.classList.remove('active');
-                    otherHeader.nextElementSibling.style.maxHeight = '0';
+                    // 確保其他內容也能正確收合
+                    otherContent.style.maxHeight = '0';
                 }
             });
 
             // 切換當前項目
-            item.classList.toggle('active');
-
-            if (item.classList.contains('active')) {
-                content.style.maxHeight = content.scrollHeight + 'px'; // 展開
+            if (isActive) {
+                // 如果是活躍狀態，要收合
+                item.classList.remove('active');
+                // 先設定為當前高度，再過渡到0
+                content.style.maxHeight = content.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = '0';
+                });
             } else {
-                content.style.maxHeight = '0'; // 收合
+                // 如果是非活躍狀態，要展開
+                item.classList.add('active');
+                // 為了獲取正確的 scrollHeight，先暫時移除 max-height 讓內容自然撐開
+                content.style.maxHeight = 'none'; // 讓內容撐開
+                const fullHeight = content.scrollHeight; // 獲取完整高度 (包含 CSS 的 padding)
+                content.style.maxHeight = '0'; // 立即縮回，不觸發過渡
+                requestAnimationFrame(() => { // 在下一幀觸發過渡
+                    content.style.maxHeight = fullHeight + 'px';
+                });
             }
         });
     });
