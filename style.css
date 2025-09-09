@@ -489,17 +489,18 @@ p {
 }
 
 .accordion-content {
-    padding: 0 25px; /* 上下為0，左右留padding */
+    padding: 0 25px; /* Collapsed state padding */
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-    background-color: #FAFAFA; /* 淺灰色內容區塊 */
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; /* 統一 transition */
+    background-color: #FAFAFA;
     border-top: 1px solid var(--border-color);
 }
 
 .accordion-item.active .accordion-content {
-    max-height: 500px; /* 足夠大的值以容納內容 */
-    padding: 20px 25px; /* 展開時加上上下padding */
+    padding: 20px 25px; /* Expanded state padding */
+    /* max-height 會由 JavaScript 動態設定，因此從 CSS 中移除固定值 */
+    /* transition 已經在 .accordion-content 中定義，這裡不需要重複 */
 }
 
 .accordion-content p {
