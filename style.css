@@ -446,45 +446,65 @@ p {
 /* --- Notes List (formerly Accordion) --- */
 .notes-list {
     max-width: 900px;
-    margin: 40px auto;
-    text-align: left;
+    margin: 40px auto; /* 確保整個列表在寬螢幕下居中 */
+    text-align: left; /* 確保列表內的文本靠左對齊 */
 }
 
 .note-item {
     background-color: white;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    padding: 25px 30px; /* 增加內邊距讓內容更舒適 */
+    border-radius: 12px; /* 稍微大一點的圓角 */
+    margin-bottom: 20px; /* 增加項目間距 */
+    padding: 30px; /* 增加內邊距 */
     box-shadow: var(--shadow-light);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex; /* 使用 flexbox 讓圖標和標題對齊 */
+    flex-direction: column; /* 內容垂直排列 */
+    align-items: flex-start; /* 內容左對齊 */
 }
 
 .note-item:hover {
     box-shadow: var(--shadow-medium);
-    transform: translateY(-5px); /* 懸停時稍微上浮 */
+    transform: translateY(-8px); /* 懸停時浮起效果更明顯 */
 }
 
 .note-item h3 {
     margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--secondary-color); /* 讓標題顏色更突出 */
-    font-size: 1.4em; /* 調整標題大小 */
+    margin-bottom: 15px; /* 標題與內容間距 */
+    color: var(--secondary-color); /* 標題顏色 */
+    font-size: 1.6em; /* 調整標題大小 */
+    display: flex; /* 讓 h3 內部圖標和文字對齊 */
+    align-items: center; /* 垂直居中對齊圖標和文字 */
+}
+
+.note-item .note-icon {
+    font-size: 1.2em; /* 圖標大小 */
+    color: var(--primary-color); /* 圖標顏色 */
+    margin-right: 12px; /* 圖標與文字間距 */
+    min-width: 25px; /* 確保圖標有足夠空間，防止文字擠壓 */
+    text-align: center; /* 讓圖標在自己的空間內居中 */
 }
 
 .note-item p {
-    font-size: 1.05em; /* 稍微調整內文大小 */
+    font-size: 1.1em; /* 內文大小 */
     color: var(--text-medium);
-    margin-bottom: 0;
-    line-height: 1.7; /* 增加行高，提升閱讀性 */
+    margin-bottom: 0; /* 移除最後段落的下邊距 */
+    line-height: 1.8; /* 增加行高，提升閱讀性 */
 }
 
 /* 響應式調整 */
 @media (max-width: 768px) {
     .note-item {
-        padding: 20px 25px;
+        padding: 25px;
+        margin-bottom: 15px;
     }
     .note-item h3 {
-        font-size: 1.2em;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    .note-item .note-icon {
+        font-size: 1em;
+        margin-right: 10px;
+        min-width: 20px;
     }
     .note-item p {
         font-size: 1em;
