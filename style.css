@@ -443,72 +443,53 @@ p {
     color: var(--secondary-color);
 }
 
-/* --- Accordion (Notes) --- */
-.accordion-container {
+/* --- Notes List (formerly Accordion) --- */
+.notes-list {
     max-width: 900px;
     margin: 40px auto;
     text-align: left;
 }
 
-.accordion-item {
+.note-item {
     background-color: white;
     border-radius: 10px;
     margin-bottom: 15px;
-    overflow: hidden;
+    padding: 25px 30px; /* 增加內邊距讓內容更舒適 */
     box-shadow: var(--shadow-light);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-.accordion-item:hover {
+
+.note-item:hover {
     box-shadow: var(--shadow-medium);
+    transform: translateY(-5px); /* 懸停時稍微上浮 */
 }
 
-.accordion-header {
-    padding: 20px 25px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    font-size: 1.2em;
-    color: var(--secondary-color);
-    background-color: #F0F8FF; /* 淺藍色背景 */
-    transition: background-color 0.3s ease;
+.note-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--secondary-color); /* 讓標題顏色更突出 */
+    font-size: 1.4em; /* 調整標題大小 */
 }
 
-.accordion-header:hover {
-    background-color: #E6F3FF;
-}
-
-.accordion-icon {
-    transition: transform 0.3s ease;
-    color: var(--primary-color);
-}
-
-.accordion-item.active .accordion-icon {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    padding: 0 25px; /* Collapsed state padding */
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; /* 統一 transition */
-    background-color: #FAFAFA;
-    border-top: 1px solid var(--border-color);
-}
-
-.accordion-item.active .accordion-content {
-    padding: 20px 25px; /* Expanded state padding */
-    /* max-height 會由 JavaScript 動態設定，因此從 CSS 中移除固定值 */
-    /* transition 已經在 .accordion-content 中定義，這裡不需要重複 */
-}
-
-.accordion-content p {
-    margin-bottom: 0;
-    font-size: 1em;
+.note-item p {
+    font-size: 1.05em; /* 稍微調整內文大小 */
     color: var(--text-medium);
+    margin-bottom: 0;
+    line-height: 1.7; /* 增加行高，提升閱讀性 */
 }
 
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .note-item {
+        padding: 20px 25px;
+    }
+    .note-item h3 {
+        font-size: 1.2em;
+    }
+    .note-item p {
+        font-size: 1em;
+    }
+}
 
 /* --- Footer --- */
 footer {
