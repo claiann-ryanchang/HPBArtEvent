@@ -135,6 +135,7 @@ p {
     text-align: center;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-light);
+    background-color: midnightblue;
 }
 
 .primary-cta, .nav-cta {
@@ -709,3 +710,23 @@ footer .footer-links a:hover {
         font-size: 1.1em;
     }
 }
+
+
+.icon-img {
+    width: 80px; /* 桌面版的固定寬度 */
+    height: auto; /* 保持比例 */
+    display: block;
+    margin: 0 auto 10px; /* 置中 + 下方留白 */
+}
+
+@media (max-width: 768px) {
+    .icon-img {
+        width: 60px; /* 手機時縮小 */
+    }
+
+}
+
+.organizers {
+    text-align: center;
+}
+
